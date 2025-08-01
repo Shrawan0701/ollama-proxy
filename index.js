@@ -9,21 +9,15 @@ app.use(express.json());
 
 const OLLAMA_BASE_URL = process.env.VITE_API_BASE_URL || 'http://localhost:11434';
 
+console.log("Using Ollama base URL:", OLLAMA_BASE_URL);
+
 app.get('/api/tags', async (req, res) => {
   try {
     const response = await axios.get(`${OLLAMA_BASE_URL}/api/tags`);
     res.json(response.data);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch tags from Ollama' });
-  }
-});
-
-app.post('/api/generate', async (req, res) => {
-  try {
-    const response = await axios.post(`${OLLAMA_BASE_URL}/api/generate`, req.body);
-    res.json(response.data);
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to generate from Ollama', detail: err.message });
+    console.error("Error fetching tags:", err.message);
+    res.status(500).json({ error: 'Failed to fetch tags from Ollama', detail: err.message });
   }
 });
 
