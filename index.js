@@ -14,13 +14,13 @@ if (!OLLAMA_BASE_URL) {
   process.exit(1);
 }
 
-console.log("✅ Using Ollama base URL:", OLLAMA_BASE_URL);
+console.log(" Using Ollama base URL:", OLLAMA_BASE_URL);
 
 app.get('/api/tags', async (req, res) => {
   try {
     const response = await axios.get(`${OLLAMA_BASE_URL}/api/tags`, {
       headers: {
-        'User-Agent': 'curl', // helps avoid 403 in some environments
+        'User-Agent': 'curl', 
       },
     });
     res.json(response.data);
@@ -35,5 +35,5 @@ app.get('/api/tags', async (req, res) => {
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`🚀 Proxy server running on port ${PORT}`);
+  console.log(` Proxy server running on port ${PORT}`);
 });
