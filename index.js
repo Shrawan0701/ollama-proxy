@@ -7,7 +7,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const OLLAMA_BASE_URL = process.env.VITE_API_BASE_URL || 'http://localhost:11434';
+const OLLAMA_BASE_URL = process.env.VITE_API_BASE_URL;
+
+if (!OLLAMA_BASE_URL) {
+  console.error("❌ VITE_API_BASE_URL is not set!");
+  process.exit(1);
+}
+
 
 console.log("Using Ollama base URL:", OLLAMA_BASE_URL);
 
